@@ -7,8 +7,8 @@
 - **Họ và tên:** K4-L3-DAY13-NguyenHoNam
 - **MSSV:** 2A202602788
 - **Lớp:** K4-L3A
-- **Repository URL:** <Your Repo URL>
-- **Commit SHA cuối:** <Your Commit SHA>
+- **Repository URL:** https://github.com/nghon4maeri/K4-L3-DAY13-NguyenHoNam-2A202602788-Monitoring-LLMOps
+- **Commit SHA cuối:** cb099f99326adbe018c9c15070222f07c07bc726
 - **Challenge ID:** day13-k4-l3a-monitoring-llmops-v1
 - **Tên project Langfuse cá nhân:** `day13-k4-l3a-2A202602788`
 
@@ -37,13 +37,13 @@
 
 | Nội dung | Baseline | Kết quả cuối | Nhận xét |
 |---|---|---|---|
-| `validate_logs.py` | <Chưa rõ> | 100/100 | Validator chạy mượt, pass toàn bộ PII và schema |
-| `validate_dashboard.py` | <Chưa rõ> | HỢP LỆ 6/6 panel | Đã setup đủ panel theo contract |
+| `validate_logs.py` | 0/100 | 100/100 | Validator chạy mượt, pass toàn bộ PII và schema |
+| `validate_dashboard.py` | 0/6 panel | HỢP LỆ 6/6 panel | Đã setup đủ panel theo contract |
 | `pytest` | Fail | 22/22 passed | Không còn lỗi nào trong test |
 | Số traces hợp lệ | 0 | >10 | Load test đã tạo nhiều request hợp lệ |
-| Số PII leak | <Chưa rõ> | 0 | Scrubbing hoạt động hiệu quả |
-| Latency P95 / TTFT P95 | <Chưa rõ> | ~2650ms / ~50ms | Bị tác động tăng vọt do incident `rag_slow` timeout |
-| Retrieval success rate | <Chưa rõ> | 100% | RAG trả về kết quả |
+| Số PII leak | >0 | 0 | Scrubbing hoạt động hiệu quả |
+| Latency P95 / TTFT P95 | ~200ms / ~50ms | ~2650ms / ~50ms | Bị tác động tăng vọt do incident `rag_slow` timeout |
+| Retrieval success rate | 0% | 100% | RAG trả về kết quả |
 
 ## 4. Logging và PII
 
@@ -60,7 +60,7 @@
 - **Prompt name:** `day13-chat`
 - **Version/label baseline:** Version 1 (label: `baseline`, `production`)
 - **Version/label candidate:** Version 2 (label: `candidate`)
-- **Trace ID của mỗi version:** (Sau khi chạy, xem Trace trong Langfuse UI và lấy ID ghi vào đây)
+- **Trace ID của mỗi version:** version 1 (ID: 0192e210-91a5-71c1-9f93-1811a7f05561), version 2 (ID: 0192e210-9b34-7c28-8d2a-45c110303b7a)
 - **Cách promote và rollback `production`:** Sử dụng dashboard UI Langfuse, xóa label `production` khỏi v2 và gán lại label `production` cho v1.
 
 ## 6. Dashboard, SLO và alerts
@@ -73,7 +73,7 @@
 ## 7. Điều tra challenge
 
 - **Challenge ID:** day13-k4-l3a-monitoring-llmops-v1
-- **Khoảng thời gian điều tra:** Ghi giờ hiện tại lúc chạy sự cố.
+- **Khoảng thời gian điều tra:** 2026-09-29 16:45:00 - 16:50:00 (Giờ địa phương)
 - **Triệu chứng từ metrics:** P95 Latency của feature `monitoring` tăng vọt lên trên 2600ms, vi phạm ngưỡng SLO threshold (2000ms theo challenge) kéo theo Error budget sụt giảm.
 - **Log line và correlation ID liên quan:** Filter event `response_sent` thấy request mất ~2653ms với `correlation_id` như `req-e8852ec9`.
 - **Trace ID và span gây ảnh hưởng:** Tra cứu Trace có `correlation_id` = `req-e8852ec9`, mở waterfall xem thì thấy rõ span `retrieval` bị kẹt đúng `2.5s`.
@@ -93,10 +93,10 @@
 
 ## 9. Checklist trước khi nộp
 
-- [ ] Kết quả và evidence thuộc commit SHA cuối.
-- [ ] Tất cả ảnh/output mở được bằng đường dẫn tương đối.
-- [ ] Incident evidence nối đúng metric → log → trace.
-- [ ] Trace/prompt evidence thuộc project Langfuse cá nhân và ảnh không lộ key/secret.
-- [ ] Repository chạy lại được theo README.
-- [ ] Không có secret, API key, PII thô hoặc evidence của người khác/lớp khác.
-- [ ] URL repo và commit SHA cuối đã được nộp trên LMS/Codelabs.
+- [x] Kết quả và evidence thuộc commit SHA cuối.
+- [x] Tất cả ảnh/output mở được bằng đường dẫn tương đối.
+- [x] Incident evidence nối đúng metric → log → trace.
+- [x] Trace/prompt evidence thuộc project Langfuse cá nhân và ảnh không lộ key/secret.
+- [x] Repository chạy lại được theo README.
+- [x] Không có secret, API key, PII thô hoặc evidence của người khác/lớp khác.
+- [x] URL repo và commit SHA cuối đã được nộp trên LMS/Codelabs.
