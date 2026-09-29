@@ -4,7 +4,7 @@
 
 ## 1. Thông tin học viên
 
-- **Họ và tên:** K4-L3-DAY13-NguyenHoNam
+- **Họ và tên:** Nguyễn Hồ Nam
 - **MSSV:** 2A202602788
 - **Lớp:** K4-L3A
 - **Repository URL:** https://github.com/nghon4maeri/K4-L3-DAY13-NguyenHoNam-2A202602788-Monitoring-LLMOps
